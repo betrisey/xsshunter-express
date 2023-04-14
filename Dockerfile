@@ -15,6 +15,8 @@ COPY package.json /app/
 COPY package-lock.json /app/
 RUN npm install
 
+RUN npm install -g wait-port
+
 COPY server.js /app/
 COPY probe.js /app/
 COPY constants.js /app/
@@ -27,9 +29,7 @@ COPY docker-entrypoint.sh /app/
 RUN chmod +x /app/docker-entrypoint.sh
 COPY templates /app/templates
 
-# Expose both HTTP and HTTPS ports
 EXPOSE 80
-EXPOSE 443
 
 # Start the server
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
